@@ -99,3 +99,26 @@ void display_resource(RESOURCE resource) {
 	printf("spice = %d/%d, population = %d%d\n", resource.spice, resource.spice_max, resource.population, resource.population_max);
 }
 
+void display_status() {
+	setCursorPosition(0, MAP_HEIGHT + 2);
+	printf("상태 창\n");
+}
+
+void display_system_message() {
+	setCursorPosition(0, MAP_HEIGHT + 3); 
+	printf("시스템 메시지 창\n");
+}
+
+void display_command() {
+	setCursorPosition(0, MAP_HEIGHT + 4); 
+	printf("명령 창\n");
+}
+
+
+void display(RESOURCE resource, char map[MAP_HEIGHT][MAP_WIDTH], CURSOR cursor) {
+	display_resource(resource);
+	display_map(map);
+	display_status();
+	display_system_message();
+	display_command();
+}
