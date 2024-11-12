@@ -23,4 +23,11 @@ void initialize_map(char map[MAP_HEIGHT][MAP_WIDTH]) {
 	map[MAP_HEIGHT - 2][3] = 'B';
 	map[MAP_HEIGHT - 3][4] = 'P';
 	map[MAP_HEIGHT - 2][4] = 'P';
+
+	map[1][MAP_HEIGHT - 3] = 'B';
+	map[1][MAP_HEIGHT - 2] = 'B';
+	map[2][MAP_HEIGHT - 3] = 'B';
+	map[2][MAP_HEIGHT - 2] = 'B';
+	map[1][MAP_HEIGHT - 4] = 'P';
+	map[2][MAP_HEIGHT - 4] = 'P';
 }
