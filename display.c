@@ -30,4 +30,67 @@ void initialize_map(char map[MAP_HEIGHT][MAP_WIDTH]) {
 	map[2][MAP_HEIGHT - 2] = 'B';
 	map[1][MAP_HEIGHT - 4] = 'P';
 	map[2][MAP_HEIGHT - 4] = 'P';
+
+	map[MAP_HEIGHT - 4][4] = '5';
+	map[2][MAP_WIDTH - 5] = '5';
+	map[MAP_HEIGHT - 4][5] = 'H';
+	map[1][MAP_WIDTH - 6] = 'H';
+
+	map[5][10] = 'W';
+	map[10][25] = 'W';
+
+	map[8][15] = 'R';
+	map[10][30] = 'R';
+	map[11][30] = 'R';
+	map[10][31] = 'R';
+	map[11][31] = 'R';
+
+
+}
+
+void display_map(char map[MAP_HEIGHT][MAP_WIDTH]) {
+	setCursorPosition(0, 1);
+
+	for (int i = 0; i < MAP_WIDTH + 2; i++) {
+		printf("#");
+	}
+	printf("\#");
+
+	for (int i = 0; i < MAP_HEIGHT; i++) {
+		printf("#");
+		for (int j = 0; j < MAP_WIDTH; j++) {
+			// 개체에 따른 색상 설정
+			switch (map[i][j]) {
+			case 'B':
+				setColor(1);  // 파란색 (Atreides 본부)
+				break;
+			case 'H':
+				setColor(4);  // 빨간색 (Harvester)
+				break;
+			case 'W':
+				setColor(6);  // 황토색 (샌드웜)
+				break;
+			case 'P':
+				setColor(8);  // 검은색 (장판)
+				break;
+			case 'R':
+				setColor(7);  // 회색 (바위)
+				break;
+			case ' ':
+				setColor(15); // 기본 흰색 (빈칸)
+				break;
+			default:
+				setColor(14); // 주황색 (스파이스는 숫자와 상관없이 주황색)
+				break;
+			}
+			printf("%c", map[i][j]);
+		}
+		setColor(15);
+		printf("#\n");
+	}
+
+	for (int i = 0; i < MAP_WIDTH + 2; i++) {
+		printf("#");
+	}
+	printf("\n");
 }
