@@ -94,3 +94,8 @@ void display_map(char map[MAP_HEIGHT][MAP_WIDTH]) {
 	}
 	printf("\n");
 }
+
+void display_resource(RESOURCE resource) {
+	printf("spice = %d/%d, population = %d%d\n", resource.spice, resource.spice_max, resource.population, resource.population_max);
+}
+
