@@ -3,7 +3,7 @@
 
 int main() {
 	RESOURCE resource = { 0,0,0,0 };
-	CUROR cursor = { 5,5 };
+	CURSOR cursor = { 5,5 };
 	char map[MAP_HEIGHT][MAP_WIDTH];
 
 	initialize_map(map);
