@@ -127,7 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="중간제출.c" />
+    <ClCompile Include="main.c" />
+    <ClCompile Include="display.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="display.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
