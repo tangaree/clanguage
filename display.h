@@ -1,6 +1,8 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
+#include<Windows.h>
+
 #define MAP_HEIGHT 18
 #define MAP_WIDTH 60
 #define N_LAYER 2
@@ -19,8 +21,11 @@ typedef struct {
 
 typedef struct {
 	POSITION pos;
+	POSITION dest;
 	char repr;
-}CURSOR;
+	int move_period;
+	int next_move_time;
+} OBJECT_SAMPLE;
 
 typedef enum {
 	k_none = 0,

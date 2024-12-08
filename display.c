@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <Windows.h>
+#include<conio.h>
 #include "display.h"
  
 void setCursorPosition(int x, int y) {
@@ -21,8 +22,13 @@ void initialize_map(char map[N_LAYER][MAP_HEIGHT][MAP_WIDTH]) {
 	}
 	//지형 초기화
 	map[0][MAP_HEIGHT - 3][2] = 'B'; //base
+	map[0][MAP_HEIGHT - 3][3] = 'B';
+	map[0][MAP_HEIGHT - 2][2] = 'B';
+	map[0][MAP_HEIGHT - 2][3] = 'B';
 	map[0][5][10] = 'R';//rock
+	map[0][10][25] = 'R';
 	map[0][MAP_HEIGHT - 4][4] = 'P'; //plate
+	map[0][MAP_HEIGHT - 2][4] = 'P';
 	map[0][MAP_HEIGHT - 4][5] = '5';//spice
 
 	//유닛 초기화
@@ -47,7 +53,7 @@ void display(char map[N_LAYER][MAP_HEIGHT][MAP_WIDTH], RESOURCE resource, CURSOR
 			char obj = map[1][i][j] != ' ' ? map[1][i][j] : map[0][i][j];
 
 			if (cursor.row == i && cursor.col == j) {
-				setcolor(2);
+				setColor(2);
 			}
 			else {
 				switch (obj) {
@@ -62,7 +68,7 @@ void display(char map[N_LAYER][MAP_HEIGHT][MAP_WIDTH], RESOURCE resource, CURSOR
 			}
 			printf("%c", obj);
 		}
-		setcolor(15);
+		setColor(15);
 		printf("#\n");
 	}
 
@@ -71,26 +77,29 @@ void display(char map[N_LAYER][MAP_HEIGHT][MAP_WIDTH], RESOURCE resource, CURSOR
 	}
 	printf("\n");
 	printf("spice : %d%d, populatin: %d%d\n", resource.spice, resource.spice_max, resource.population, resource.population_max);
-	etCursorPosition(0, MAP_HEIGHT + 2);
+	setCursorPosition(0, MAP_HEIGHT + 2);
 	printf("상태창: 커서 위치 (%d, %d)\n", cursor.row, cursor.col);
+	setCursorPosition(0, MAP_HEIGHT + 4);
+	printf("#시스템 메시지 창 #\n");
+	printf("#   명   령    창 #\n");
 }
 
-KEY get_key() {
-	if (!_kbhit()) {
-		return k_none;
-	}
-	int byte = _getch();
-	switch (byte) {
-	case 'q': return k_quit;
-	case 224:
-		byte = _getch();
-		switch (byte) {
-		case 72: return k_up;
-		case 75: return k_left;
-		case 77: return k_right;
-		case 80: return k_down;
-		}
-	}
-	return k_undef;
-}
-
+//KEY get_key() {
+//	if (!_kbhit()) {
+//		return k_none;
+//	}
+//	int byte = _getch();
+//	switch (byte) {
+//	case 'q': return k_quit;
+//	case 224:
+//		byte = _getch();
+//		switch (byte) {
+//		case 72: return k_up;
+//		case 75: return k_left;
+//		case 77: return k_right;
+//		case 80: return k_down;
+//		}
+//	}
+//	return k_undef;
+//}
+//

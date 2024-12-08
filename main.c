@@ -3,13 +3,14 @@
 
 int main() {
 	RESOURCE resource = { 10,50,5,20 };
-	char map[N_LAYER][MAP_HEIGHT][MAP_WIDTH];
-	CURSOR cursor = { MAP_HEIGHT / 2, MAP_WIDTH / 2 };
+	char front_buffer[N_LAYER][MAP_HEIGHT][MAP_WIDTH];
+	char back_buffer[N_LAYER][MAP_HEIGHT][MAP_WIDTH];
+	POSITION cursor = { MAP_HEIGHT / 2, MAP_WIDTH / 2 };
 
-	initialize_map(map);
+	initialize_map(front_buffer);
 
 	while (1) {
-		display (map, resource, cursor);
+		display (front_buffer, resource, cursor);
 		printf("\nPress 'q' to quit.\n");
 
 		KEY key = get_key();
