@@ -40,8 +40,11 @@ typedef enum {
 void setCursorPosition(int x, int y);
 void setColor(int color);
 void initialize_map(char map[N_LAYER][MAP_HEIGHT][MAP_WIDTH]);
-void display(char map[N_LAYER][MAP_HEIGHT][MAP_WIDTH], RESOURCE resource, CURSOR cursor);
+void display(char map[N_LAYER][MAP_HEIGHT][MAP_WIDTH], RESOURCE resource, POSITION cursor);
 
 KEY get_key();
 
 #endif
+void display_command_box(char map[N_LAYER][MAP_HEIGHT][MAP_WIDTH], POSITION cursor);
+void clear_command_box();
+void display_system_message(const char* message);

@@ -8,6 +8,34 @@ void setCursorPosition(int x, int y) {
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
+void display_command_box(char map[N_LAYER][MAP_HEIGHT][MAP_WIDTH], POSITION cursor) {
+	setCursorPosition(0, MAP_HEIGHT + 3); 
+	printf("Command Box: Cursor at (%d, %d)\n", cursor.row, cursor.col);
+}
+
+void clear_command_box() {
+	setCursorPosition(0, MAP_HEIGHT + 3);
+	for (int i = 0; i < 80; i++) { 
+		printf(" ");
+	}
+	setCursorPosition(0, MAP_HEIGHT + 3);
+}
+
+void display_system_message(const char* message) {
+	static char log[5][50] = { 0 }; 
+	for (int i = 4; i > 0; i--) {
+		strcpy_s(log[i], sizeof(log[i]), log[i - 1]);
+	}
+	strcpy_s(log[0], sizeof(log[0]), message);
+
+	
+	for (int i = 0; i < 5; i++) {
+		setCursorPosition(0, MAP_HEIGHT + 5 + i);
+		printf("%s\n", log[i]);
+	}
+}
+
+
 void setColor(int color) {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
@@ -35,10 +63,12 @@ void initialize_map(char map[N_LAYER][MAP_HEIGHT][MAP_WIDTH]) {
 	map[1][MAP_HEIGHT - 4][5] = 'H';//harvester
 	map[1][10][25] = 'W';//sandworm
 	
-
 }
+	/*char map[N_LAYER][MAP_HEIGHT][MAP_WIDTH] = { {{0}} };
+	char back_buffer[N_LAYER][MAP_HEIGHT][MAP_WIDTH] = { {{0}} };
+	setCursorPosition(0, 0);*/
 
-void display(char map[N_LAYER][MAP_HEIGHT][MAP_WIDTH], RESOURCE resource, CURSOR cursor) {
+void display(char map[N_LAYER][MAP_HEIGHT][MAP_WIDTH], RESOURCE resource, POSITION cursor) {
 	setCursorPosition(0, 0);
 
 	for (int i = 0; i < MAP_WIDTH + 2; i++) {
@@ -76,7 +106,7 @@ void display(char map[N_LAYER][MAP_HEIGHT][MAP_WIDTH], RESOURCE resource, CURSOR
 		printf("#");
 	}
 	printf("\n");
-	printf("spice : %d%d, populatin: %d%d\n", resource.spice, resource.spice_max, resource.population, resource.population_max);
+	printf("Spice: %d/%d, Population: %d/%d\n", resource.spice, resource.spice_max, resource.population, resource.population_max);
 	setCursorPosition(0, MAP_HEIGHT + 2);
 	printf("상태창: 커서 위치 (%d, %d)\n", cursor.row, cursor.col);
 	setCursorPosition(0, MAP_HEIGHT + 4);
@@ -84,22 +114,22 @@ void display(char map[N_LAYER][MAP_HEIGHT][MAP_WIDTH], RESOURCE resource, CURSOR
 	printf("#   명   령    창 #\n");
 }
 
-//KEY get_key() {
-//	if (!_kbhit()) {
-//		return k_none;
-//	}
-//	int byte = _getch();
-//	switch (byte) {
-//	case 'q': return k_quit;
-//	case 224:
-//		byte = _getch();
-//		switch (byte) {
-//		case 72: return k_up;
-//		case 75: return k_left;
-//		case 77: return k_right;
-//		case 80: return k_down;
-//		}
-//	}
-//	return k_undef;
-//}
-//
+KEY get_key() {
+	if (!_kbhit()) {
+		return k_none;
+	}
+	int byte = _getch();
+	switch (byte) {
+	case 'q': return k_quit;
+	case 224:
+		byte = _getch();
+		switch (byte) {
+		case 72: return k_up;
+		case 75: return k_left;
+		case 77: return k_right;
+		case 80: return k_down;
+		}
+	}
+	return k_undef;
+}
+
